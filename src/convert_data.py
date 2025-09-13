@@ -13,6 +13,7 @@ data = pd.read_csv(dataset_path)
 # Select the columns we want to use
 data = data[["price", "year", "odometer"]]
 labels = data["price"]
+data = data.drop(columns="price")
 
 # Split the data into training and test sets
 train_data, test_data, train_labels, test_labels = sklearn.model_selection.train_test_split(data, 
