@@ -2,6 +2,10 @@ from convert_data import data, labels
 import sklearn.model_selection
 import numpy as np
 
+# Create two new columns with the square of the year and the square of the odometer
+data["year_squared"] = data["year"] ** 2
+data["odometer_squared"] = data["odometer"] ** 2
+
 # Split the data into training and test sets
 train_data, test_data, train_labels, test_labels = sklearn.model_selection.train_test_split(data, 
                                                                                             labels, 

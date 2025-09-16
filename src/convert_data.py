@@ -14,16 +14,3 @@ data = pd.read_csv(dataset_path)
 data = data[["price", "year", "odometer"]]
 labels = data["price"]
 data = data.drop(columns="price")
-
-# Split the data into training and test sets
-train_data, test_data, train_labels, test_labels = sklearn.model_selection.train_test_split(data, 
-                                                                                            labels, 
-                                                                                            test_size=0.2, 
-                                                                                            shuffle=True, 
-                                                                                            random_state=2025)
-
-# Standardize the data
-train_means = train_data.mean()
-train_stds = train_data.std()
-train_data = (train_data - train_means) / train_stds
-test_data  = (test_data  - train_means) / train_stds
