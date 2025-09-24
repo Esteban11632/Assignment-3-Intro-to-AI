@@ -6,6 +6,7 @@
 \usepackage[a3paper, margin=1in]{geometry} % Adjust margins here
 \usepackage{float} % For better control of figure placement
 \linespread{1.5} % 1.5 for one and a half spacing
+\usepackage{indentfirst}
 
 \lstdefinelanguage{Scheme}{
   keywords={define, let, if, cond, lambda, set!, quote, begin, display, newline},
@@ -35,10 +36,41 @@
 
 \maketitle
 
-\section*{Introduction}
+\section*{Part 1}
+From the results of in part 1, the test and train Root Mean Squared Error (RMSE), are extremely similar. This points us towards the idea that the model is underfitted. Also, from the coefficients, the odometer had a slightly larger impact in the regression model.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{AI_Part1.png}
+    \caption{Part 1 Results}
+    \label{fig:placeholder}
+\end{figure}
+\section*{Part 2}
+When the squared terms were added to both the training and testing data, and a new regression model was trained, it had a noticeable impact on the coefficients of the variables. In part 1, the odometer had a higher importance in the model but, when the squared terms were added, the year and the year squared columns took priority. The results below show that the coefficients for the year and year\textunderscore squared are magnitudes larger than the odometer and odometer\textunderscore squared. It is also worth noting that the coefficient for year\textunderscore squared is higher than just the year by itself. Whereas the odometer's coefficient is higher than the odometer\textunderscore squared's coefficient. 
 
-\section*{Code}
+In reviewing the train and test RMSE we found that, once again, they were both similar to one another. The train RMSE was marginally lower than that of the test RMSE, as shown in figure 2. Nevertheless, the level of fitting for this model can still be considered to be underfitted given that the difference between the RMSE of both is that large.
 
-\section*{Results}
+Adding in the square terms to the regression model lowered RMSE in both the training and testing data helps to better capture the trends of the data. Therefore, when the squared terms were added, the RMSE for both the test and train data was lowered.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{AI_Part2.png}
+    \caption{Part 2 Results}
+    \label{fig:placeholder}
+\end{figure}
+\section*{Part 3}
+For the third part of the assignment a column that involved the cross term between the year and odometer was added as a feature that would be used to train the model. With the absolute value of the feature’s coefficients, from the results below, the year\textunderscore squared and year still dominate in their relative importance to the model. Interestingly enough, the cross term, year\textunderscore odometer, was also calculated to have a higher coefficient than both the odometer and odometer\textunderscore squared. Also worth noting, the coefficient for the odometer feature is magnitudes higher than that of the odometer\textunderscore squared feature, where in part 2, they both had similar magnitudes. 
+
+From the improvements of the model, given that the RMSE for both the training and testing data improved with each additional feature, the model became more balanced. The cross terms and squared terms help to capture the trends of the data, without relying too much on memorization of the data itself. 
+
+The effect of adding the cross term into the training of the model helped lower the RMSE, as mentioned above, and it allows for the year and odometer to interact with one another. Since the year and odometer are being multiplied with each other, this means that year can affect the odometer and vice versa. With the squared terms, the variables did not directly interact with one another but, with the cross term, this then allows for the model to capture the dependency that the year and odometer might have on the price of a vehicle. 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Screenshot 2025-09-21 182748.png}
+    \caption{Part 3 Results}
+    \label{fig:placeholder}
+\end{figure}
+\section*{Part 4}
+After completing each of the three models, the model that we would entrust the most with predicting the price of unseen vehicles is the third model. The third model not only has the squared terms, which help in modelling the curvature of the data but also, the cross term adds to a more refined model. This backed by our results where the third model was the one that had the lowest RMSE for both the training and testing data. Therefore, the third model is the best one to handle predicting the prices of cars outside of the data that it was trained and tested on. 
+
+Thinking further on how to improve this model, it would not make sense to add in the square terms for one-hot encoded categorical columns. All of the data in these columns are either 1’s or 0’s because of this, adding a squared term for each of these columns would add no new information. Regardless if either 1 or 0 are squared, they give the same result. Similarly, for cross terms there are two scenarios. If a one hot encoded column is multiplied with another column of the same type, say the manufacturer of the car, then the result will always be 0 because the car can only be from one manufacturer. However, cross terms between columns of different categories could provide some useful and new information. Perhaps a cross term between the manufacturer and the color of the car, if both are 1, could indeed affect the price of the car between different colors, or different manufactures with the same colors.Thus, although some cross terms are redundant, there is some value in having cross terms for completely different categorical columns.
 
 \end{document}
